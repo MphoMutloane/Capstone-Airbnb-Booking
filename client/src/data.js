@@ -1,23 +1,11 @@
-import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
 import {
-  GiBarn,
-  GiBoatFishing,
-  GiCactus,
-  GiCastle,
-  GiCaveEntrance,
-  GiForestCamp,
-  GiIsland,
-  GiWindmill,
-} from "react-icons/gi";
-import {
-  FaSkiing,
   FaPumpSoap,
   FaShower,
   FaFireExtinguisher,
   FaUmbrellaBeach,
   FaKey,
 } from "react-icons/fa";
-import { FaHouseUser, FaPeopleRoof, FaKitchenSet } from "react-icons/fa6";
+import { FaKitchenSet } from "react-icons/fa6";
 import {
   BiSolidWasher,
   BiSolidDryer,

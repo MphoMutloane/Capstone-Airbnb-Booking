@@ -10,12 +10,17 @@ const Reservations = () => {
 
   const getFeedReservations = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/reservations/book", {
-        method: "GET",
-      });
+      const response = await fetch(
+        "http://localhost:3001/api/reservations/book",
+        {
+          method: "GET",
+        }
+      );
 
       if (!response.ok) {
-        throw new Error("Failed to fetch reservations. Please try again later.");
+        throw new Error(
+          "Failed to fetch reservations. Please try again later."
+        );
       }
 
       const data = await response.json();
@@ -23,7 +28,9 @@ const Reservations = () => {
       if (Array.isArray(data)) {
         dispatch(setReservations({ reservations: data }));
       } else {
-        throw new Error("Unexpected response format. Reservations data is missing.");
+        throw new Error(
+          "Unexpected response format. Reservations data is missing."
+        );
       }
       setLoading(false);
     } catch (err) {
@@ -34,7 +41,7 @@ const Reservations = () => {
 
   useEffect(() => {
     getFeedReservations();
-  }, []);
+  }, [getFeedReservations]);
 
   return (
     <>
@@ -80,6 +87,3 @@ const Reservations = () => {
 };
 
 export default Reservations;
-
-
-

@@ -67,38 +67,38 @@ const Listings = () => {
   };
 
   const updateListing = async (listingId, updatedData) => {
-  try {
-    const response = await fetch(
-      `http://localhost:3001/api/listings/${listingId}`,
-      {
-        method: "PUT",
-        body: updatedData,
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/listings/${listingId}`,
+        {
+          method: "PUT",
+          body: updatedData,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update listing");
       }
-    );
 
-    if (!response.ok) {
-      throw new Error("Failed to update listing");
+      const updatedListing = await response.json();
+
+      dispatch(
+        setListings({
+          listings: listings.map((item) =>
+            item._id === listingId ? updatedListing : item
+          ),
+        })
+      );
+      alert("Listing updated successfully");
+    } catch (err) {
+      console.error("Update Listing Failed:", err.message);
+      alert("Failed to update listing. Please try again later.");
     }
-
-    const updatedListing = await response.json();
-
-    dispatch(
-      setListings({
-        listings: listings.map((item) =>
-          item._id === listingId ? updatedListing : item
-        ),
-      })
-    );
-    alert("Listing updated successfully");
-  } catch (err) {
-    console.error("Update Listing Failed:", err.message);
-    alert("Failed to update listing. Please try again later.");
-  }
-};
+  };
 
   useEffect(() => {
     getFeedListings();
-  }, []);
+  }, [getFeedListings]);
 
   return (
     <>

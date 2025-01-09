@@ -136,8 +136,8 @@ const Banner = () => {
         </div>
       </div>
       <div className="banner_bottom">
-        <div className="banner_image">
-          <img src="/assets/bigCard.png" alt="banner image" />
+        <div className="banner_i">
+          <img src="/assets/bigCard.png" alt="banner" />
         </div>
       </div>
     </div>

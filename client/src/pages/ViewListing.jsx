@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/ViewListing.css";
 import Navbar from "../components/Navbar";
 import Listings from "../components/Listings";
+import Footer from "../components/Footer";
 
 const ViewListing = () => {
   return (
@@ -23,6 +24,7 @@ const ViewListing = () => {
         <h1>View Listings</h1>
       </div>
       <Listings />
+      <Footer />
     </div>
   );
 };

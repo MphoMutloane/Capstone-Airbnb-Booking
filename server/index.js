@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
+const path = require("path"); 
 
 // Import Routes
 const authRoutes = require("./routes/auth.js");
@@ -15,12 +16,23 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Routes
-app.use("/auth", authRoutes); // Auth-related routes
-app.use("/api/listings", listingRoutes); // Listing-related routes
-app.use("/api/reservations", reservationRoutes); // Reservation-related routes
+app.use("/auth", authRoutes); 
+app.use("/api/listings", listingRoutes); 
+app.use("/api/reservations", reservationRoutes); 
+
+// Serve Frontend in Production
+if (process.env.NODE_ENV === "production") {
+  const buildPath = path.join(__dirname, "../client/build"); // Adjust path if needed
+  app.use(express.static(buildPath));
+
+  // Serve index.html for all non-API routes
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(buildPath, "index.html"));
+  });
+}
 
 // Mongoose Setup
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 mongoose
   .connect(process.env.MONGO_URI, {

@@ -14,9 +14,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {},
-  "scripts": {
-    "start": "nodemon index.js"
-  },
+ "scripts": {
+  "start": "node index.js"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",

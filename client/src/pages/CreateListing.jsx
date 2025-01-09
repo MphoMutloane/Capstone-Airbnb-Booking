@@ -1,6 +1,6 @@
 import "../styles/CreateListing.css";
 import Navbar from "../components/Navbar";
-import { types} from "../data";
+import { types } from "../data";
 import { RemoveCircleOutline, AddCircleOutline } from "@mui/icons-material";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { IoIosImages } from "react-icons/io";
@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { BiTrash } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 const CreateListing = () => {
   const [type, setType] = useState("");
@@ -95,7 +96,6 @@ const CreateListing = () => {
 
   const creatorId = useSelector((state) => state.user._id);
 
-
   const navigate = useNavigate();
 
   const handlePost = async (e) => {
@@ -114,24 +114,27 @@ const CreateListing = () => {
       listingForm.append("description", formDescription.description);
       listingForm.append("price", formDescription.price);
 
-        /* Append each selected photos to the FormData object */
-        photos.forEach((photo) => {
-          listingForm.append("listingPhotos", photo);
-        });
-  
-        /* Send a POST request to server */
-        const response = await fetch("http://localhost:3001/api/listings/create", {
+      /* Append each selected photos to the FormData object */
+      photos.forEach((photo) => {
+        listingForm.append("listingPhotos", photo);
+      });
+
+      /* Send a POST request to server */
+      const response = await fetch(
+        "http://localhost:3001/api/listings/create",
+        {
           method: "POST",
           body: listingForm,
-        });
-  
-        if (response.ok) {
-          navigate("/");
         }
-      } catch (err) {
-        console.log("Publish Listing failed", err.message);
+      );
+
+      if (response.ok) {
+        navigate("/");
       }
-    };
+    } catch (err) {
+      console.log("Publish Listing failed", err.message);
+    }
+  };
 
   return (
     <div>
@@ -403,6 +406,7 @@ const CreateListing = () => {
           </div>
         </form>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/ViewReservation.css";
 import Navbar from "../components/Navbar";
 import Reservations from "../components/Reservations"; // Ensure correct import path
+import Footer from "../components/Footer";
 
 const ViewReservation = () => {
   return (
@@ -23,9 +24,9 @@ const ViewReservation = () => {
         <h1>View Reservation</h1>
         <Reservations />
       </div>
+      <Footer />
     </div>
   );
 };
 
 export default ViewReservation;
-

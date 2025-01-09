@@ -1,4 +1,11 @@
 {
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
@@ -10,17 +17,10 @@
     "multer": "^1.4.4",
     "multer-gridfs-storage": "^5.0.2"
   },
-  "name": "server",
-  "version": "1.0.0",
-  "main": "index.js",
   "devDependencies": {},
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
-  },
-  "keywords": [],
+  "description": "",
   "author": "",
-  "license": "ISC",
-  "description": ""
+  "license": "ISC"
 }
+
 

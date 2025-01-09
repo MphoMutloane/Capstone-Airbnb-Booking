@@ -9,10 +9,6 @@
     "client": "cd client && npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "concurrently": "^7.6.0",
     "webpack-dev-server": "^5.2.0"
@@ -21,3 +17,4 @@
     "nodemon": "^3.1.9"
   }
 }
+

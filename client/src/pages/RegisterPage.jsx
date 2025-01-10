@@ -12,27 +12,30 @@ const RegisterPage = () => {
     profileImage: null,
   });
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-      [name]: name === "profileImage" ? files[0] : value,
-    });
-  };
-
-  console.log(formData);
-
   const [passwordMatch, setPasswordMatch] = useState(true);
 
   useEffect(() => {
     setPasswordMatch(
-      formData.password === formData.confirmPassword ||
-        formData.confirmPassword === ""
+      formData.password === formData.confirmPassword || formData.confirmPassword === ""
     );
   }, [formData.password, formData.confirmPassword]);
 
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === "profileImage") {
+      setFormData({
+        ...formData,
+        profileImage: files[0], 
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value, 
+      });
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,7 +43,7 @@ const RegisterPage = () => {
     try {
       const register_form = new FormData();
 
-      for (var key in formData) {
+      for (let key in formData) {
         register_form.append(key, formData[key]);
       }
 
@@ -51,6 +54,9 @@ const RegisterPage = () => {
 
       if (response.ok) {
         navigate("/login");
+      } else {
+        const errorData = await response.json();
+        alert(errorData.message || "Registration failed!");
       }
     } catch (err) {
       console.log("Registration failed", err.message);
@@ -122,7 +128,6 @@ const RegisterPage = () => {
               style={{ maxWidth: "80px" }}
             />
           )}
-          ;
           <button type="submit" disabled={!passwordMatch}>
             Register
           </button>
@@ -134,3 +139,4 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
+

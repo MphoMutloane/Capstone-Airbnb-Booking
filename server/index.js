@@ -7,9 +7,15 @@ const path = require("path");
 const app = express();
 
 // Middleware
-app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
+
+const corsOptions = {
+  origin: "http://localhost:3000", 
+  methods: "GET,POST,PUT,DELETE", 
+  credentials: true, 
+};
+app.use(cors(corsOptions)); 
 
 // Import Routes
 const authRoutes = require("./routes/auth.js");

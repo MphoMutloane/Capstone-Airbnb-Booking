@@ -8,7 +8,7 @@ import { setLogout } from "../redux/state";
 
 const Navbar = () => {
   const [dropdownMenu, setDropdownMenu] = useState(false);
-  const user = useSelector((state) => state.user); // Assuming 'user' contains the user details
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   return (
@@ -29,7 +29,7 @@ const Navbar = () => {
 
       <div className="navbar_right">
         {user && user.email ? (
-          <span className="user-email">{user.email}</span> // Display user email
+          <span className="user-email">{user.email}</span>
         ) : (
           <a href="/login" className="host">
             Become A Host
@@ -45,10 +45,7 @@ const Navbar = () => {
             <Person />
           ) : (
             <img
-              src={`http://localhost:3001/${user.profileImagePath.replace(
-                "public",
-                ""
-              )}`}
+              src={`http://localhost:3001/${user.profileImagePath}`}
               alt="profile"
               style={{ objectFit: "cover", borderRadius: "50%" }}
             />
@@ -84,4 +81,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 

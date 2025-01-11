@@ -15,7 +15,8 @@ const corsOptions = {
   methods: "GET,POST,PUT,DELETE", 
   credentials: true, 
 };
-app.use(cors(corsOptions)); 
+
+app.use(cors(corsOptions)); // Use CORS with the specified options
 
 // Import Routes
 const authRoutes = require("./routes/auth.js");

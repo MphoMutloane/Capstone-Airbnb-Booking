@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import state from "./state"; // reducer
+import state from "./state"; 
 
 const persistConfig = {
   key: "root",

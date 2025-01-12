@@ -3,7 +3,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const path = require("path");
-
 const app = express();
 
 // Middleware
@@ -11,12 +10,11 @@ app.use(express.json());
 app.use(express.static("public"));
 
 const corsOptions = {
-  origin: "http://localhost:3000", 
-  methods: "GET,POST,PUT,DELETE", 
-  credentials: true, 
+  origin: "http://localhost:3000",
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true,
 };
-
-app.use(cors(corsOptions)); // Use CORS with the specified options
+app.use(cors(corsOptions)); 
 
 // Import Routes
 const authRoutes = require("./routes/auth.js");
@@ -33,8 +31,15 @@ if (process.env.NODE_ENV === "production") {
   const buildPath = path.join(__dirname, "../client/build");
   app.use(express.static(buildPath));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(buildPath, "index.html"));
+  app.get("/*", (req, res) => {
+    res.sendFile(
+      path.join(__dirname, "../client/build/index.html"),
+      function (err) {
+        if (err) {
+          res.status(500).send(err);
+        }
+      }
+    );
   });
 }
 
@@ -51,9 +56,4 @@ mongoose
     console.log("Connected to MongoDB!");
     app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
   })
-  .catch((err) =>
-    console.error(`Database connection error: ${err.message}`)
-  );
-
-
-
+  .catch((err) => console.error(`Database connection error: ${err.message}`));

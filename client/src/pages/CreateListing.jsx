@@ -30,32 +30,6 @@ const CreateListing = () => {
   const [roomCount, setRoomCount] = useState(1);
   const [bathCount, setBathCount] = useState(1);
 
-  // Amenities
-  // const [amenities, setAmenities] = useState([]);
-  // const [selectedAmenity, setSelectedAmenity] = useState("");
-
-  // const handleAddAmenity = () => {
-  //   if (
-  //     selectedAmenity &&
-  //     facilities.some((item) => item.name === selectedAmenity)
-  //   ) {
-  //     if (!amenities.includes(selectedAmenity)) {
-  //       setAmenities((prev) => [...prev, selectedAmenity]);
-  //     } else {
-  //       alert("This amenity is already added.");
-  //     }
-  //   } else {
-  //     alert("Please select a valid amenity from the list.");
-  //   }
-  //   setSelectedAmenity("");
-  // };
-
-  // const handleRemoveAmenity = (amenityToRemove) => {
-  //   setAmenities((prev) =>
-  //     prev.filter((amenity) => amenity !== amenityToRemove)
-  //   );
-  // };
-
   // Upload, drag & drop, remove photos
   const [photos, setPhotos] = useState([]);
 
@@ -100,34 +74,30 @@ const CreateListing = () => {
 
   const handlePost = async (e) => {
     e.preventDefault();
-
+  
     try {
-      // Create a new FormData object to handle file uploads
       const listingForm = new FormData();
       listingForm.append("creator", creatorId);
       listingForm.append("type", type);
       listingForm.append("location", formLocation.location);
       listingForm.append("bathCount", bathCount);
       listingForm.append("roomCount", roomCount);
-      // listingForm.append("amenities", amenities);
       listingForm.append("listingName", formDescription.listingName);
       listingForm.append("description", formDescription.description);
       listingForm.append("price", formDescription.price);
-
-      /* Append each selected photos to the FormData object */
+  
       photos.forEach((photo) => {
         listingForm.append("listingPhotos", photo);
       });
-
-      /* Send a POST request to server */
+  
       const response = await fetch(
-        "http://localhost:3001/api/listings/create",
+        "http://localhost:3001/api/listings/create", // Corrected route
         {
           method: "POST",
           body: listingForm,
         }
       );
-
+  
       if (response.ok) {
         navigate("/");
       }
@@ -135,6 +105,7 @@ const CreateListing = () => {
       console.log("Publish Listing failed", err.message);
     }
   };
+  
 
   return (
     <div>
@@ -275,42 +246,6 @@ const CreateListing = () => {
                 required
               />
             </div>
-
-            {/* <div className="create-listing-step3-right">
-              <div>
-                <p>Amenities</p>
-                <div className="selected-amenities">
-                  <div className="amenities-list">
-                    {amenities.map((amenity, index) => (
-                      <span key={index} className="amenity-chip">
-                        {amenity}
-                        <button
-                          onClick={() => handleRemoveAmenity(amenity)}
-                          className="remove-button"
-                        >
-                          ×
-                        </button>
-                      </span>
-                    ))}
-                  </div>
-                  <input
-                    placeholder="Select an amenity"
-                    name="Amenities"
-                    value={selectedAmenity}
-                    onChange={(e) => setSelectedAmenity(e.target.value)}
-                    list="amenity-options"
-                  />
-                  <datalist id="amenity-options">
-                    {facilities.map((facility, index) => (
-                      <option key={index} value={facility.name} />
-                    ))}
-                  </datalist>
-                </div>
-              </div>
-              <div>
-                <button onClick={handleAddAmenity}>Add</button>
-              </div>
-            </div> */}
           </div>
 
           <div className="create-listing_step4">

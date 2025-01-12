@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const multer = require("multer");
-
 const Listing = require("../models/Listing");
 const User = require("../models/User");
 
@@ -15,6 +14,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+
 
 /* CREATE LISTING */
 router.post("/create", upload.array("listingPhotos"), async (req, res) => {

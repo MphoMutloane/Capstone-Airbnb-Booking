@@ -12,26 +12,23 @@ const Listings = () => {
   const getFeedListings = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3001/api/listings/properties",
+        "http://localhost:3001/api/listings/properties", // Ensure backend route matches
         {
           method: "GET",
         }
       );
-
+  
       if (!response.ok) {
         throw new Error("Failed to fetch listings. Please try again later.");
       }
-
+  
       const data = await response.json();
-      console.log("Fetched Listings:", data); // Log the fetched data to ensure it's correct
-
-      // Check if the response is valid and contains the listings data
+      console.log("Fetched Listings:", data);
+  
       if (Array.isArray(data)) {
         dispatch(setListings({ listings: data }));
       } else {
-        throw new Error(
-          "Unexpected response format. Listings data is missing."
-        );
+        throw new Error("Unexpected response format. Listings data is missing.");
       }
       setLoading(false);
     } catch (err) {
@@ -39,6 +36,7 @@ const Listings = () => {
       setLoading(false);
     }
   };
+  
 
   const deleteListing = async (listingId) => {
     try {

@@ -22,9 +22,9 @@ const listingRoutes = require("./routes/listing.js");
 const reservationRoutes = require("./routes/reservation.js");
 
 // API Routes
-app.use("/auth", authRoutes); // Authentication routes
-app.use("/api/listings", listingRoutes); // Listing-related routes
-app.use("/api/reservations", reservationRoutes); // Reservation-related routes
+app.use("/auth", authRoutes); 
+app.use("/api/listings", listingRoutes); 
+app.use("/api/reservations", reservationRoutes); 
 
 // Serve Frontend in Production
 if (process.env.NODE_ENV === "production") {

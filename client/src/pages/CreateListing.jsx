@@ -91,7 +91,7 @@ const CreateListing = () => {
       });
   
       const response = await fetch(
-        "http://localhost:3001/api/listings/create", // Corrected route
+        "http://localhost:3001/api/listings/create", 
         {
           method: "POST",
           body: listingForm,
